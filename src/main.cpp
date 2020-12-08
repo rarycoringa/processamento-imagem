@@ -93,9 +93,9 @@ void abre_img(char nome[], Img &img){
     }else{
       arq >> img.largura >> img.altura >> img.limite_pixel;
 
-      for(int i = 0; i < img.altura; i++){
-        for(int j = 0; j < img.largura; j++){
-          arq >> img.pixel[i][j];
+      for(int n = 0; n < img.altura; n++){
+        for(int m = 0; m < img.largura; m++){
+          arq >> img.pixel[n][m];
         }
       }
     }
@@ -117,9 +117,9 @@ void salva_img(char nome[], Img img){
     arq << img.largura << " " << img.altura << endl;
     arq << img.limite_pixel << endl;
 
-    for(int i = 0; i < img.altura; i++){
-      for(int j = 0; j < img.largura; j++){
-        arq << img.pixel[i][j] << " ";
+    for(int n = 0; n < img.altura; n++){
+      for(int m = 0; m < img.largura; m++){
+        arq << img.pixel[n][m] << " ";
       }
       arq << endl;
     }
@@ -129,7 +129,11 @@ void salva_img(char nome[], Img img){
 }
 
 // Funções de processamento de imagens
-// void binariza_img(Img &img);
+void binariza_img(Img &img){
+  int limiar = 127;
+
+  for(int n = 0; n < )
+}
 // void corta_img(Img &img);
 // void dilata_img(Img &img);
 // void equaliza_img(Img &img);
