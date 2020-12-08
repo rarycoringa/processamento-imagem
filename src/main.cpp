@@ -130,7 +130,7 @@ void salva_img(char nome[], Img img){
 
 // Funções de processamento de imagens
 void binariza_img(Img &img){
-  int limiar
+  int limiar;
 
   cout << endl;
   cout << "Informe o limiar desejado: ";
