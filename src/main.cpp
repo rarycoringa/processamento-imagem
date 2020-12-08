@@ -130,7 +130,11 @@ void salva_img(char nome[], Img img){
 
 // Funções de processamento de imagens
 void binariza_img(Img &img){
-  int limiar = 127;
+  int limiar
+
+  cout << endl;
+  cout << "Informe o limiar desejado: ";
+  cin >> limiar;
 
   for(int n = 0; n < img.altura; n++){
     for(int m = 0; m < img.largura; m++){
@@ -145,7 +149,10 @@ void binariza_img(Img &img){
   }
 }
 
-// void corta_img(Img &img);
+// void corta_img(Img &img){
+//
+// }
+
 // void dilata_img(Img &img);
 // void equaliza_img(Img &img);
 // void inverte_img(Img &img);
