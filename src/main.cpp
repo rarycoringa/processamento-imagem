@@ -149,9 +149,30 @@ void binariza_img(Img &img){
   }
 }
 
-// void corta_img(Img &img){
-//
-// }
+void corta_img(Img &img){
+  int m_inicial, n_inicial, largura, altura;
+
+  cout << endl;
+  cout << "A imagem possui " << img.largura << "px X " << img.altura << "px" << endl;
+  cout << "Informe a largura inicial do recorte: ";
+  cin >> m_inicial;
+  cout << "Informe a altura inicial do recorte: ";
+  cin >> n_inicial;
+  cout << "Informe a largura desejada da imagem final: ";
+  cin >> largura;
+  cout << "Informe a altura desejada da imagem final: ";
+  cin >> altura;
+
+  for(int n = n_inicial; n < n_inicial+altura; n++){
+    for(int m = m_inicial; m < m_inicial+largura; m++){
+      img.pixel[n-n_inicial][m-m_inicial] = img.pixel[n][m];
+    }
+  }
+
+  img.altura = altura;
+  img.largura = largura;
+
+}
 
 // void dilata_img(Img &img);
 // void equaliza_img(Img &img);
@@ -190,10 +211,10 @@ int main(){
 
       if(indice == 1){
         binariza_img(img);
+      }else if(indice == 2){
+        corta_img(img);
       }
-      // }else if(indice == 2){
-      //
-      // }else if(indice == 3){
+      // else if(indice == 3){
       //
       // }else if(indice == 4){
       //
