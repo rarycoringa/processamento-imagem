@@ -132,8 +132,19 @@ void salva_img(char nome[], Img img){
 void binariza_img(Img &img){
   int limiar = 127;
 
-  for(int n = 0; n < )
+  for(int n = 0; n < img.altura; n++){
+    for(int m = 0; m < img.largura; m++){
+
+      if(img.pixel[n][m] < limiar){
+        img.pixel[n][m] = 0;
+      }else{
+        img.pixel[n][m] = 255;
+      }
+
+    }
+  }
 }
+
 // void corta_img(Img &img);
 // void dilata_img(Img &img);
 // void equaliza_img(Img &img);
@@ -170,8 +181,9 @@ int main(){
       //   cout << endl;
       // }
 
-      // if(indice == 1){
-      //
+      if(indice == 1){
+        binariza_img(img);
+      }
       // }else if(indice == 2){
       //
       // }else if(indice == 3){
