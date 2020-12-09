@@ -68,6 +68,13 @@ void assinatura(){
 }
 
 // Funções de gerenciamento de imagens
+void solicita_nome_img(char nome[]){
+  cout << endl;
+  cout << "Insira o nome da imagem a ser processada: ";
+  cin.ignore();
+  cin.getline(nome, TAM_MAX);
+}
+
 void abre_img(char nome[], Img &img){
   fstream arq;
 
@@ -242,10 +249,7 @@ int main(){
       cout << endl;
       cout << "Por favor, escolha uma opção válida!" << endl;
     }else if(indice != 0){
-      cout << endl;
-      cout << "Insira o nome da imagem a ser processada: ";
-      cin.ignore();
-      cin.getline(nome, TAM_MAX);
+      solicita_nome_img(nome);
 
       abre_img(nome, img);
 
@@ -274,11 +278,9 @@ int main(){
       // }else if(indice == 6){
       //
       // }
-
       cout << endl;
-      cout << "Insira o nome da nova imagem processada: ";
-      cin.ignore();
-      cin.getline(nome, TAM_MAX);
+      cout << "Insira o nome da nova imagem processada: " << endl;
+      cin << nome;
 
       salva_img(nome, img);
     }
