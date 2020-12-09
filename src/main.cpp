@@ -68,13 +68,6 @@ void assinatura(){
 }
 
 // Funções de gerenciamento de imagens
-void solicita_nome_img(char nome[]){
-  cout << endl;
-  cout << "Insira o nome da imagem a ser processada: ";
-  cin.ignore();
-  cin.getline(nome, TAM_MAX);
-}
-
 void abre_img(char nome[], Img &img){
   fstream arq;
 
@@ -220,7 +213,16 @@ void equaliza_img(Img &img){
   }
 }
 
-// void inverte_img(Img &img);
+void inverte_img(Img &img){
+  Img img_original = img;
+
+  for(int n = 0; n < img.altura; n++){
+    for(int m = 0; m < img.largura; m++){
+      img.pixel[n][m] = img_original.pixel[img_original.altura-1-n][m];
+    }
+  }
+}
+
 // void solariza_img(Img &img);
 
 // Programa principal
@@ -240,7 +242,10 @@ int main(){
       cout << endl;
       cout << "Por favor, escolha uma opção válida!" << endl;
     }else if(indice != 0){
-      solicita_nome_img(nome);
+      cout << endl;
+      cout << "Insira o nome da imagem a ser processada: ";
+      cin.ignore();
+      cin.getline(nome, TAM_MAX);
 
       abre_img(nome, img);
 
@@ -263,13 +268,18 @@ int main(){
         dilata_img(img);
       }else if(indice == 4){
         equaliza_img(img);
+      }else if(indice == 5){
+        inverte_img(img);
       }
-      // else if(indice == 5){
-      //
       // }else if(indice == 6){
       //
       // }
-      //
+
+      cout << endl;
+      cout << "Insira o nome da nova imagem processada: ";
+      cin.ignore();
+      cin.getline(nome, TAM_MAX);
+
       salva_img(nome, img);
     }
 
