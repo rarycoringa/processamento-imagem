@@ -79,7 +79,7 @@ bool abre_img(char nome[], Img &img){
   fstream arq;
   bool resultado;
 
-  arq.open(string("../img/") + nome);
+  arq.open(string("../images/") + nome);
 
   if(!arq.is_open()){
     cout << endl;
@@ -112,7 +112,7 @@ bool salva_img(char nome[], Img img){
   ofstream arq;
   bool resultado;
 
-  arq.open(string("../img/out_") + nome);
+  arq.open(string("../images/out_") + nome);
 
   if(!arq.is_open()){
     cout << endl;
