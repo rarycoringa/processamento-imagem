@@ -77,20 +77,21 @@ void solicita_nome_img(char nome[]){
 
 bool abre_img(char nome[], Img &img){
   fstream arq;
+  bool resultado;
 
   arq.open(string("../img/") + nome);
 
   if(!arq.is_open()){
     cout << endl;
     cout << "Erro: Arquivo não encontrado!" << endl;
-    return false;
+    resultado = false;
   }else{
     arq >> img.formato;
 
     if(img.formato != string("P2")){
       cout << endl;
       cout << "Erro: Tipo de imagem não suportado!" << endl;
-      return false;
+      resultado = false;
     }else{
       arq >> img.largura >> img.altura >> img.limite_pixel;
 
@@ -99,22 +100,24 @@ bool abre_img(char nome[], Img &img){
           arq >> img.pixel[n][m];
         }
       }
-      return true;
+      resultado = true;
     }
 
     arq.close();
   }
+  return resultado;
 }
 
 bool salva_img(char nome[], Img img){
   ofstream arq;
+  bool resultado;
 
   arq.open(string("../img_out/") + nome);
 
   if(!arq.is_open()){
     cout << endl;
     cout << "Erro: Permissão negada ou falta de espaço em disco!" << endl;
-    return false;
+    resultado = false;
   }else{
     arq << img.formato << endl;
     arq << img.largura << " " << img.altura << endl;
@@ -129,9 +132,9 @@ bool salva_img(char nome[], Img img){
 
     arq.close();
 
-    return true;
+    resultado = true;
   }
-
+  return resultado;
 }
 
 // Funções de processamento de imagens
