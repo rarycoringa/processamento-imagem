@@ -75,7 +75,7 @@ void solicita_nome_img(char nome[]){
   cin.getline(nome, TAM_MAX);
 }
 
-void abre_img(char nome[], Img &img){
+bool abre_img(char nome[], Img &img){
   fstream arq;
 
   arq.open(string("../img/") + nome);
@@ -83,13 +83,14 @@ void abre_img(char nome[], Img &img){
   if(!arq.is_open()){
     cout << endl;
     cout << "Erro: Arquivo não encontrado!" << endl;
-    // exit(0);
+    return false;
   }else{
     arq >> img.formato;
 
     if(img.formato != string("P2")){
       cout << endl;
       cout << "Erro: Tipo de imagem não suportado!" << endl;
+      return false;
     }else{
       arq >> img.largura >> img.altura >> img.limite_pixel;
 
@@ -98,13 +99,14 @@ void abre_img(char nome[], Img &img){
           arq >> img.pixel[n][m];
         }
       }
+      return true;
     }
 
     arq.close();
   }
 }
 
-void salva_img(char nome[], Img img){
+bool salva_img(char nome[], Img img){
   ofstream arq;
 
   arq.open(string("../img_out/") + nome);
@@ -112,6 +114,7 @@ void salva_img(char nome[], Img img){
   if(!arq.is_open()){
     cout << endl;
     cout << "Erro: Permissão negada ou falta de espaço em disco!" << endl;
+    return false;
   }else{
     arq << img.formato << endl;
     arq << img.largura << " " << img.altura << endl;
@@ -123,12 +126,12 @@ void salva_img(char nome[], Img img){
       }
       arq << endl;
     }
+
+    arq.close();
+
+    return true;
   }
 
-  arq.close();
-
-  cout << endl;
-  cout << "Imagem processada e salva com sucesso!" << endl;
 }
 
 // Funções de processamento de imagens
@@ -230,7 +233,25 @@ void inverte_img(Img &img){
   }
 }
 
-// void solariza_img(Img &img);
+void solariza_img(Img &img){
+  int limiar;
+
+  cout << endl;
+  cout << "Informe o limiar desejado: ";
+  cin >> limiar;
+
+  for(int n = 0; n < img.altura; n++){
+    for(int m = 0; m < img.largura; m++){
+
+      if(img.pixel[n][m] < limiar){
+        img.pixel[n][m] = 0;
+      }else{
+        img.pixel[n][m] = 255;
+      }
+
+    }
+  }
+}
 
 // Programa principal
 int main(){
@@ -251,35 +272,28 @@ int main(){
     }else if(indice != 0){
       solicita_nome_img(nome);
 
-      abre_img(nome, img);
+      if(abre_img(nome, img)){
+        if(indice == 1){
+          binariza_img(img);
+        }else if(indice == 2){
+          corta_img(img);
+        }else if(indice == 3){
+          binariza_img(img);
+          dilata_img(img);
+        }else if(indice == 4){
+          equaliza_img(img);
+        }else if(indice == 5){
+          inverte_img(img);
+        }else if(indice == 6){
+          solariza_img(img);
+        }
 
-      // cout << nome << " " << img.formato << " " << img.largura << " " << img.altura << " " << img.limite_pixel << endl;
-
-      // for(int i = 0; i < 5; i++){
-      //   for (int j = 0; j < 5; j++){
-      //     cout << img.pixel[i][j] << " ";
-      //   }
-      //   cout << endl;
-      // }
-
-      if(indice == 1){
-        binariza_img(img);
-      }else if(indice == 2){
-        corta_img(img);
+        if(salva_img(nome, img)){
+          cout << endl;
+          cout << "Imagem processada e salva com sucesso!" << endl;
+        }
       }
-      else if(indice == 3){
-        binariza_img(img);
-        dilata_img(img);
-      }else if(indice == 4){
-        equaliza_img(img);
-      }else if(indice == 5){
-        inverte_img(img);
-      }
-      // }else if(indice == 6){
-      //
-      // }
-      
-      salva_img(nome, img);
+
     }
 
   }while(indice != 0);
