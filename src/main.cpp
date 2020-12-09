@@ -41,10 +41,10 @@ void encerra_programa(){
   cout << "Programa encerrado. Obrigado!" << endl;
 }
 
-void footer(){
+void assinatura(){
 
   cout << endl;
-  cout << "=================== FOOTER =======================" << endl;
+  cout << "==================================================" << endl;
   cout << "Projeto" << endl;
   cout << "  Processamento de Imagens com C++" << endl;
   cout << "  Projeto Final | Última Etapa | Terceira Unidade" << endl;
@@ -175,7 +175,7 @@ void corta_img(Img &img){
 }
 
 void dilata_img(Img &img){
-  
+
   for(int n = 0; n < img.altura - 1; n++){
     for(int m = 0; m < img.largura - 1; m++){
 
@@ -247,7 +247,7 @@ int main(){
 
   encerra_programa();
 
-  footer();
+  assinatura();
 
   return 0;
 }
