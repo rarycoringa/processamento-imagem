@@ -126,6 +126,9 @@ void salva_img(char nome[], Img img){
   }
 
   arq.close();
+
+  cout << endl;
+  cout << "Imagem processada e salva com sucesso!" << endl;
 }
 
 // Funções de processamento de imagens
@@ -189,7 +192,34 @@ void dilata_img(Img &img){
   }
 }
 
-// void equaliza_img(Img &img);
+int equaliza_somatorio(int r, int h[256]){
+  int soma = 0;
+
+  for(int i = 0; i <= r; i++){
+    soma += h[i];
+  }
+
+  return soma;
+}
+
+void equaliza_img(Img &img){
+  int h[256] = {};
+
+  for(int n = 0; n < img.altura; n++){
+    for(int m = 0; m < img.largura; m++){
+      h[img.pixel[n][m]]++;
+    }
+  }
+
+  for(int n = 0; n < img.altura; n++){
+    for(int m = 0; m < img.largura; m++){
+      int r = img.pixel[n][m];
+      int s = equaliza_somatorio(r, h)*255/(img.altura*img.largura);
+      img.pixel[n][m] = s;
+    }
+  }
+}
+
 // void inverte_img(Img &img);
 // void solariza_img(Img &img);
 
@@ -231,10 +261,10 @@ int main(){
       else if(indice == 3){
         binariza_img(img);
         dilata_img(img);
+      }else if(indice == 4){
+        equaliza_img(img);
       }
-      // }else if(indice == 4){
-      //
-      // }else if(indice == 5){
+      // else if(indice == 5){
       //
       // }else if(indice == 6){
       //
