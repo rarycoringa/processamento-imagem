@@ -1,5 +1,5 @@
 # Imagens Processadas
-/img_out
+/img/out_*
 
 # Prerequisites
 *.d
