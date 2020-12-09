@@ -278,10 +278,7 @@ int main(){
       // }else if(indice == 6){
       //
       // }
-      cout << endl;
-      cout << "Insira o nome da nova imagem processada: " << endl;
-      cin << nome;
-
+      
       salva_img(nome, img);
     }
 
