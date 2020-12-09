@@ -174,7 +174,21 @@ void corta_img(Img &img){
 
 }
 
-// void dilata_img(Img &img);
+void dilata_img(Img &img){
+  
+  for(int n = 0; n < img.altura - 1; n++){
+    for(int m = 0; m < img.largura - 1; m++){
+
+      if(img.pixel[n][m] == 255 || img.pixel[n][m+1] == 255 || img.pixel[n+1][m] == 255 || img.pixel[n+1][m+1] == 255){
+        img.pixel[n][m] = 255;
+      }else{
+        img.pixel[n][m] = 0;
+      }
+
+    }
+  }
+}
+
 // void equaliza_img(Img &img);
 // void inverte_img(Img &img);
 // void solariza_img(Img &img);
@@ -214,8 +228,10 @@ int main(){
       }else if(indice == 2){
         corta_img(img);
       }
-      // else if(indice == 3){
-      //
+      else if(indice == 3){
+        binariza_img(img);
+        dilata_img(img);
+      }
       // }else if(indice == 4){
       //
       // }else if(indice == 5){
