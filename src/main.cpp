@@ -220,7 +220,16 @@ void equaliza_img(Img &img){
   }
 }
 
-// void inverte_img(Img &img);
+void inverte_img(Img &img){
+  Img img_original = img;
+
+  for(int n = 0; n < img.altura; n++){
+    for(int m = 0; m < img.largura; m++){
+      img.pixel[n][m] = img_original.pixel[img_original.altura-1-n][m];
+    }
+  }
+}
+
 // void solariza_img(Img &img);
 
 // Programa principal
@@ -263,13 +272,16 @@ int main(){
         dilata_img(img);
       }else if(indice == 4){
         equaliza_img(img);
+      }else if(indice == 5){
+        inverte_img(img);
       }
-      // else if(indice == 5){
-      //
       // }else if(indice == 6){
       //
       // }
-      //
+      cout << endl;
+      cout << "Insira o nome da nova imagem processada: " << endl;
+      cin << nome;
+
       salva_img(nome, img);
     }
 
